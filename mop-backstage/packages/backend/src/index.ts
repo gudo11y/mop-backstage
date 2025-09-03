@@ -63,4 +63,9 @@ backend.add(import('@backstage/plugin-kubernetes-backend'));
 backend.add(import('@backstage/plugin-notifications-backend'));
 backend.add(import('@backstage/plugin-signals-backend'));
 
+// github org plugin
+backend.add(import('@backstage/plugin-catalog-backend-module-github-org'));
+
+backend.add(import('@backstage/plugin-catalog-backend-module-github'));
+
 backend.start();
