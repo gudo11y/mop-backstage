@@ -15,16 +15,23 @@ jsonnet_deps = [
 ]
 
 local_resource(
-    name='build',
-    cmd='scripts/tilt_build.sh'
+    name='setup',
+    cmd= 'scripts/tilt_setup.sh {tk_env}'.format(tk_env=tk_env),
 )
 
 local_resource(
-    name='setup',
-    cmd= 'scripts/tilt_setup.sh {tk_env}'.format(tk_env=tk_env),
-    resource_deps=['build']
+    name='build',
+    cmd='scripts/tilt_build.sh',
+    resource_deps=['setup']
 )
 
+# docker_build(
+#     name='backstage',
+#     context='.',
+#     dockerfile='mop-backstage/packages/backend/Dockerfile',
+#     push=True,
+#     resource_deps=['build']
+# )
 # watch_file('scripts/tilt_setup.sh')
 
 

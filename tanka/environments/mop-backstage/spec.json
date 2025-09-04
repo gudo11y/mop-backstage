@@ -8,7 +8,7 @@
     "contextNames": [
       "minikube"
     ],
-    "namespace": "default",
+    "namespace": "mop",
     "resourceDefaults": {},
     "expectVersions": {}
   }
