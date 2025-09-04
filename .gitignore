@@ -144,3 +144,4 @@ tanka/environments/*/charts
 
 # Titl
 .tilt
+tmp/

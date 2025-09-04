@@ -4,10 +4,10 @@ metadata:
   name: mop-backstage
   description: An example of a Backstage application.
   # Example for optional annotations
-  # annotations:
-  #   github.com/project-slug: backstage/backstage
-  #   backstage.io/techdocs-ref: dir:.
+  annotations:
+    github.com/project-slug: gudo11y/mop-backstage
+    'backstage.io/kubernetes-id': mop-backstage
 spec:
-  type: website
-  owner: john@example.com
-  lifecycle: experimental
+  type: service
+  owner: beengud
+  lifecycle: production

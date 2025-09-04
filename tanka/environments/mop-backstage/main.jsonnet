@@ -2,11 +2,11 @@ local alloy = import 'alloy.jsonnet';
 local backstage = import 'backstage.jsonnet';
 local common = import 'common.libsonnet';
 local config = import 'config.jsonnet';
+local k = import 'k.libsonnet';
 local kps = import 'kps.jsonnet';
 local loki = import 'loki.jsonnet';
 local mimir = import 'mimir.jsonnet';
 local tempo = import 'tempo.jsonnet';
-local k = import 'k.libsonnet';
 {
   config: config.config,
   backstage: backstage.backstage,
@@ -18,10 +18,22 @@ local k = import 'k.libsonnet';
         GITHUB_CLIENT_SECRET: 'OWZjYjc5ZDcwZjgwZDIyNTAxYTljNzI1MmU4YmI2MGVkOTk5MGUyOQo=',
       },
     ),
-  ]
+    {
+      apiVersion: 'v1',
+      kind: 'Secret',
+      metadata: {
+        name: 'backstage-sa-token',
+        namespace: common.namespace,
+        annotations: {
+          'kubernetes.io/service-account.name': 'backstage-sa',
+        },
+      },
+      type: 'kubernetes.io/service-account-token',
+    }
+  ],
   // kps: kps.kps,
   // loki: loki.loki,
   // mimir: mimir.mimir,
-  // alloy: alloy.alloy,
+  alloy: alloy.alloy,
   // tempo: tempo.tempo,
 }

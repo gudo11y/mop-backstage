@@ -103,6 +103,31 @@ local common = import 'common.libsonnet';
                 },
               },
             },
+
+            kubernetes: {
+              serviceLocatorMethod: {
+                type: 'multiTenant',
+              },
+              clusterLocatorMethods: [
+                {
+                  type: 'config',
+                  clusters: [
+                    {
+                      // url: '${KUBERNETES_MASTER}',
+                      url: 'http://127.0.0.1:32836',
+                      name: 'minikube',
+                      authProvider: 'serviceAccount',
+                      skipTLSVerify: true,
+                      skipMetricsLookup: true,
+                      // serviceAccountToken: '${K8S_MINIKUBE_TOKEN}',
+                      serviceAccountToken: 'derp',
+                    },
+                  ],
+                },
+              ],
+
+
+            },
             permission: {
               enabled: 'false',
             },
@@ -113,6 +138,9 @@ local common = import 'common.libsonnet';
         },
         postgresql+: {
           enabled: 'true',
+        },
+        serviceAccount+: {
+          create: true,
         },
       },
     },
