@@ -25,18 +25,18 @@ backend:
     origin: http://localhost:3000
     methods: [GET, HEAD, PATCH, POST, PUT, DELETE]
     credentials: true
-  # This is for local development only, it is not recommended to use this in production
+  # This is for local development only, it is not recommended to use this in pr oduction
   # The production database configuration is stored in app-config.production.yaml
   database:
     client: better-sqlite3
     connection: ':memory:'
   # workingDirectory: /tmp # Use this to configure a working directory for the scaffolder, defaults to the OS temp-dir
 
-integrations:
-  github:
-    - host: github.com
-      apps:
-        - $include: github-app-mop-backstage-credentials.yaml
+# integrations:
+#   github:
+#     - host: github.com
+#       apps:
+#         - $include: github-app-mop-backstage-credentials.yaml
 
 # proxy:
   ### Example for how to add a proxy endpoint for the frontend.
@@ -62,6 +62,16 @@ auth:
   providers:
     # See https://backstage.io/docs/auth/guest/provider
     guest: {}
+# auth:
+#   providers:
+#     github:
+#       development:
+#         clientId: ${GITHUB_CLIENT_ID}
+#         clientSecret: ${GITHUB_CLIENT_SECRET}
+#         signIn:
+#           resolvers:
+#             - resolver: usernameMatchingUserEntityName
+
 
 # scaffolder:
   # see https://backstage.io/docs/features/software-templates/configuration for software template options
@@ -75,35 +85,39 @@ catalog:
   locations:
     # Local example data, file locations are relative to the backend process, typically `packages/backend`
     - type: file
-      target: ../../examples/entities.yaml
-
-    - type: url
-      target: https://gihub.com/gudo11y/mop-core/catalog.yaml
+      target: ../examples/entities.yaml
 
     # Local example template
     - type: file
-      target: ../../examples/template/template.yaml
+      target: ../examples/template/template.yaml
       rules:
         - allow: [Template]
 
     # Local example organizational data
     - type: file
-      target: ../../examples/org.yaml
+      target: ../examples/org.yaml
       rules:
         - allow: [User, Group]
 
-    - type: file
-      target: ./catalog.yaml
-
-  providers:
-    githubOrg:
-      id: 'github'
-      githubUrl: 'https://github.com'
-      orgs: ['gudo11y']
-      schedule:
-        initialDelay: { seconds: 30 }
-        frequency: { seconds: 10 }
-        timeout: { minutes: 50 }
+  # providers:
+  #   githubOrg:
+  #     id: 'github'
+  #     githubUrl: 'https://github.com'
+  #     orgs: ['gudo11y']
+  #     schedule:
+  #       initialDelay: { seconds: 30 }
+  #       frequency: { seconds: 10 }
+  #       timeout: { minutes: 50 }
+  #   github:
+  #     providerId:
+  #       organization: 'gudo11y'
+  #       catalogPath: './catalog-info.yaml'
+  #       filters:
+  #         branch: 'main'
+  #         repository: '.*'
+  #       schedule:
+  #         frequency: { minutes: 1 }
+  #         timeout: { seconds: 45 }
 
     ## Uncomment these lines to add more example data
     # - type: url

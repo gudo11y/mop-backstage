@@ -29,7 +29,7 @@ local tempo = import 'tempo.jsonnet';
         },
       },
       type: 'kubernetes.io/service-account-token',
-    }
+    },
   ],
   // kps: kps.kps,
   // loki: loki.loki,

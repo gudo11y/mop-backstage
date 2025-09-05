@@ -1,13 +1,10 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: mop-backstage
-  description: An example of a Backstage application.
+  name: derp
+  description: An example of a derpapplication.
   # Example for optional annotations
-  annotations:
-    github.com/project-slug: gudo11y/mop-backstage
-    'backstage.io/kubernetes-id': mop-backstage
 spec:
   type: service
-  owner: beengud
+  owner: gudo11y
   lifecycle: production

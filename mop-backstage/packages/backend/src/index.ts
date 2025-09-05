@@ -71,4 +71,7 @@ backend.add(import('@backstage/plugin-catalog-backend-module-github-org'));
 
 backend.add(import('@backstage/plugin-catalog-backend-module-github'));
 
+backend.add(import('@backstage/plugin-events-backend-module-github'));
+
+
 backend.start();
