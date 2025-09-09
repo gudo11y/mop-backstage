@@ -32,11 +32,11 @@ backend:
     connection: ':memory:'
   # workingDirectory: /tmp # Use this to configure a working directory for the scaffolder, defaults to the OS temp-dir
 
-# integrations:
-#   github:
-#     - host: github.com
-#       apps:
-#         - $include: github-app-mop-backstage-credentials.yaml
+integrations:
+  github:
+    - host: github.com
+      apps:
+        - $include: github-app-mop-backstage-credentials.yaml
 
 # proxy:
   ### Example for how to add a proxy endpoint for the frontend.
@@ -57,20 +57,20 @@ techdocs:
   publisher:
     type: 'local' # Alternatives - 'googleGcs' or 'awsS3'. Read documentation for using alternatives.
 
-auth:
-  # see https://backstage.io/docs/auth/ to learn about auth providers
-  providers:
-    # See https://backstage.io/docs/auth/guest/provider
-    guest: {}
 # auth:
+#   # see https://backstage.io/docs/auth/ to learn about auth providers
 #   providers:
-#     github:
-#       development:
-#         clientId: ${GITHUB_CLIENT_ID}
-#         clientSecret: ${GITHUB_CLIENT_SECRET}
-#         signIn:
-#           resolvers:
-#             - resolver: usernameMatchingUserEntityName
+#     # See https://backstage.io/docs/auth/guest/provider
+#     guest: {}
+auth:
+  providers:
+    github:
+      development:
+        clientId: ${GITHUB_CLIENT_ID}
+        clientSecret: ${GITHUB_CLIENT_SECRET}
+        signIn:
+          resolvers:
+            - resolver: usernameMatchingUserEntityName
 
 
 # scaffolder:
@@ -99,25 +99,25 @@ catalog:
       rules:
         - allow: [User, Group]
 
-  # providers:
-  #   githubOrg:
-  #     id: 'github'
-  #     githubUrl: 'https://github.com'
-  #     orgs: ['gudo11y']
-  #     schedule:
-  #       initialDelay: { seconds: 30 }
-  #       frequency: { seconds: 10 }
-  #       timeout: { minutes: 50 }
-  #   github:
-  #     providerId:
-  #       organization: 'gudo11y'
-  #       catalogPath: './catalog-info.yaml'
-  #       filters:
-  #         branch: 'main'
-  #         repository: '.*'
-  #       schedule:
-  #         frequency: { minutes: 1 }
-  #         timeout: { seconds: 45 }
+  providers:
+    githubOrg:
+      id: 'github'
+      githubUrl: 'https://github.com'
+      orgs: ['gudo11y']
+      schedule:
+        initialDelay: { seconds: 30 }
+        frequency: { seconds: 10 }
+        timeout: { minutes: 50 }
+    github:
+      providerId:
+        organization: 'gudo11y'
+        catalogPath: './catalog-info.yaml'
+        filters:
+          branch: 'main'
+          repository: '.*'
+        schedule:
+          frequency: { minutes: 1 }
+          timeout: { seconds: 45 }
 
     ## Uncomment these lines to add more example data
     # - type: url

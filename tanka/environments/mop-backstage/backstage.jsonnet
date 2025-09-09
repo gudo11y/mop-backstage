@@ -126,7 +126,7 @@ local common = import 'common.libsonnet';
 
             kubernetes: {
               serviceLocatorMethod: {
-                type: 'multiTenant',
+                type: 'singleTenant',
               },
               clusterLocatorMethods: [
                 {
