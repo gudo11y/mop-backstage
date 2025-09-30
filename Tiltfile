@@ -20,9 +20,15 @@ local_resource(
 )
 
 local_resource(
+    name='vendor-charts',
+    cmd='cd tanka/environments/{tk_env} && tk tool charts vendor'.format(tk_env=tk_env),
+    resource_deps=['setup']
+)
+
+local_resource(
     name='build',
     cmd='scripts/tilt_build.sh',
-    resource_deps=['setup']
+    resource_deps=['vendor-charts']
 )
 
 # docker_build(
