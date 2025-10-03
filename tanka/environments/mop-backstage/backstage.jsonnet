@@ -17,6 +17,17 @@ local common = import 'common.libsonnet';
           },
           command: ['node', 'packages/backend'],
           containerPorts+: { backend: 7007 },
+          extraEnvVars: [
+            {
+              name: 'POSTGRES_PASSWORD',
+              valueFrom: {
+                secretKeyRef: {
+                  name: 'backstage-postgresql',
+                  key: 'postgres-password',
+                },
+              },
+            },
+          ],
           appConfig+: {
             app: {
               title: 'Managed Observability Platform',
@@ -35,8 +46,8 @@ local common = import 'common.libsonnet';
                 connection: {
                   host: '${POSTGRES_HOST}',
                   port: '${POSTGRES_PORT}',
-                  user: '${POSTGRES_USER}',
-                  password: '8SGI8Yt4KY',
+                  user: 'postgres',
+                  password: '${POSTGRES_PASSWORD}',
                 },
               },
             },
@@ -159,6 +170,32 @@ local common = import 'common.libsonnet';
         },
         postgresql+: {
           enabled: 'true',
+          image+: {
+            registry: 'docker.io',
+            repository: 'postgres',
+            tag: '15-alpine',
+          },
+          auth+: {
+            username: 'postgres',
+            database: 'backstage',
+            postgresPassword: '${POSTGRES_ADMIN_PASSWORD}',
+          },
+          primary+: {
+            extraEnvVars: [
+              {
+                name: 'POSTGRES_USER',
+                value: 'postgres',
+              },
+              {
+                name: 'POSTGRES_DB',
+                value: 'backstage',
+              },
+              {
+                name: 'PGDATA',
+                value: '/var/lib/postgresql/data/pgdata',
+              },
+            ],
+          },
         },
         serviceAccount+: {
           create: true,
