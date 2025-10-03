@@ -129,7 +129,21 @@ catalog:
     #   rules:
     #     - allow: [User, Group]
 
-# kubernetes:
+kubernetes:
+  serviceLocatorMethod:
+    type: 'multiTenant'
+  clusterLocatorMethods:
+    - type: 'config'
+      clusters:
+        - url: https://kubernetes.default.svc
+          name: minikube
+          authProvider: 'serviceAccount'
+          skipTLSVerify: false
+          skipMetricsLookup: false
+          customResources:
+            - group: 'argoproj.io'
+              apiVersion: 'v1alpha1'
+              plural: 'rollouts'
   # see https://backstage.io/docs/features/kubernetes/configuration for kubernetes configuration options
 
 # see https://backstage.io/docs/permissions/getting-started for more on the permission framework
